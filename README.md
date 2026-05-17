@@ -1,25 +1,46 @@
-# bilibili-dl
+# bilibili-dl — Bilibili Video Downloader GUI
 
-Download or get direct MP4 URLs from Bilibili (b23.tv or BV links).
+GUI-приложение для Windows с минимальным интерфейсом. Вставить ссылку → выбрать качество → скачать.
 
-## Usage
-
-```bash
-./bilibili_dl.sh "https://b23.tv/xxxxx"       # show URLs
-./bilibili_dl.sh -d "https://b23.tv/xxxxx"    # download (best quality)
-./bilibili_dl.sh -d -q 64 "https://b23.tv/xxxxx"  # download 720p
-```
-
-Quality: `16`=360p, `32`=480p, `64`=720p, `80`=1080p
-
-## How it works
-
-1. Resolve BV ID from short link
-2. Bilibili API → `cid` + metadata
-3. Bilibili CDN API → signed MP4 URLs (primary + backup)
+![screenshot](screenshot.png)
 
 ## Requirements
 
-- bash
-- curl
-- python3
+- Python 3.10+
+- tkinter (идёт в комплекте с Python)
+- curl (для Windows — скачать и положить в ту же папку или добавить в PATH)
+
+## Установка
+
+```bash
+# клонировать
+git clone https://github.com/IlyaDarin/bilibili-dl.git
+cd bilibili-dl
+
+# (опционально) скачать curl.exe для Windows
+# https://curl.se/windows/
+```
+
+## Использование
+
+```bash
+python bilibili_gui.py
+```
+
+Или открыть двойным кликом.
+
+## Интерфейс
+
+1. Вставить ссылку (b23.tv или BV...)
+2. Выбрать качество (360p / 480p / 720p / 1080p)
+3. Нажать "Скачать"
+4. Выбрать папку сохранения
+5. Ждать завершения
+
+## Структура
+
+| Файл | Описание |
+|------|----------|
+| `bilibili_dl.py` | Python-ядро (API вызовы, скачивание) |
+| `bilibili_gui.py` | tkinter GUI обёртка |
+| `bilibili_dl.sh` | (Linux) оригинальный bash-скрипт |
